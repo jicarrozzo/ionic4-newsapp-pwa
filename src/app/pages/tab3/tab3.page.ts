@@ -13,11 +13,13 @@ export class Tab3Page implements OnInit {
 		allowSlideNext: false
 	};
 
-	favorites: Article[] = [];
+	//favorites: Article[] = [];
 	constructor(public datalocalService: DataLocalService) {}
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		console.log(this.datalocalService.newsFavorites.length);
+	}
 
 	ionViewDidEnter() {
-		this.favorites = this.datalocalService.newsFavorites;
+		//this.favorites = this.datalocalService.newsFavorites;
 	}
 }

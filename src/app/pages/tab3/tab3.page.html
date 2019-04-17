@@ -8,8 +8,8 @@
 </ion-header>
 
 <ion-content color="dark">
-
-  <ion-slides [options]="slidesOpts" *ngIf="this.datalocalService.newsFavorites?.length ===0">
+  
+  <ion-slides [options]="slidesOpts" *ngIf="this.datalocalService.newsFavorites && this.datalocalService.newsFavorites.length ===0">
     <ion-slide>
       <h3>You have no favorites yet!</h3>
     </ion-slide>
