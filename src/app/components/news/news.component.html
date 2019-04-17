@@ -14,7 +14,9 @@
     <ion-card-title (click)="launch()">{{ article.title }}</ion-card-title>
   </ion-card-header>
 
-  <ion-img *ngIf="article.urlToImage" [src]="article.urlToImage" (click)="launch()" ></ion-img>
+  <ion-img *ngIf="article.urlToImage" [src]="article.urlToImage"
+    class="animated fadeIn slow"
+   (click)="launch()" ></ion-img>
 
   <ion-card-content>
     <p>{{ article.description }}</p>

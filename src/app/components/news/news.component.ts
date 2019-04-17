@@ -4,6 +4,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 import { ActionSheetController } from '@ionic/angular';
+import { DataLocalService } from '../../services/data-local.service';
+import { ActionSheetButton } from '@ionic/core';
 
 @Component({
 	selector: 'app-news',
@@ -13,11 +15,13 @@ import { ActionSheetController } from '@ionic/angular';
 export class NewsComponent implements OnInit {
 	@Input() article: Article;
 	@Input() index: number;
+	@Input() isFavorites: boolean;
 
 	constructor(
 		private inappbrowser: InAppBrowser,
 		private actionSheetCtrl: ActionSheetController,
-		private socialCtrl: SocialSharing
+		private socialCtrl: SocialSharing,
+		private datalocalService: DataLocalService
 	) {}
 
 	ngOnInit() {}
@@ -27,6 +31,32 @@ export class NewsComponent implements OnInit {
 	}
 
 	async more() {
+		let favoritesAddRem: ActionSheetButton;
+		if (this.isFavorites)
+			favoritesAddRem = {
+				text: 'Remove',
+				icon: 'trash',
+				cssClass: 'action-dark',
+				handler: () => {
+					console.log('Favorite remove');
+					try {
+						this.datalocalService.favoritesDelete(this.article);
+					} catch (error) {}
+				}
+			};
+		else
+			favoritesAddRem = {
+				text: 'Favorite',
+				icon: 'star',
+				cssClass: 'action-dark',
+				handler: () => {
+					console.log('Favorite clicked');
+					try {
+						this.datalocalService.favoritesSet(this.article);
+					} catch (error) {}
+				}
+			};
+
 		const actionSheet = await this.actionSheetCtrl.create({
 			buttons: [
 				{
@@ -38,14 +68,7 @@ export class NewsComponent implements OnInit {
 						this.socialCtrl.share(this.article.title, this.article.source.name, '', this.article.url);
 					}
 				},
-				{
-					text: 'Favorite',
-					icon: 'star',
-					cssClass: 'action-dark',
-					handler: () => {
-						console.log('Favorite clicked');
-					}
-				},
+				favoritesAddRem,
 				{
 					text: 'Cancel',
 					icon: 'close',

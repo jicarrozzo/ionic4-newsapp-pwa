@@ -8,6 +8,7 @@ import { Article } from '../../interfaces/news';
 })
 export class NewsGroupComponent implements OnInit {
 	@Input() newsgroup: Article[] = [];
+	@Input() isFavorites: boolean = false;
 
 	constructor() {}
 
