@@ -25,7 +25,7 @@ import { environment } from '../environments/environment';
 		AppRoutingModule,
 		HttpClientModule,
 		IonicStorageModule.forRoot({
-			name: '__newsapp4DB'
+			name: 'rsw.NewsAppPWADB'
 		}),
 		ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
 	],
