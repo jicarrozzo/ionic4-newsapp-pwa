@@ -9,8 +9,8 @@ import { Article } from '../../interfaces/news';
 	styleUrls: [ 'tab2.page.scss' ]
 })
 export class Tab2Page implements OnInit {
-	@ViewChild(IonSegment) segment: IonSegment;
-	@ViewChild(IonInfiniteScroll) scroll: IonInfiniteScroll;
+	@ViewChild(IonSegment, { static: true }) segment: IonSegment;
+	@ViewChild(IonInfiniteScroll, { static: true }) scroll: IonInfiniteScroll;
 
 	news: Article[] = [];
 	categories = [ 'business', 'entertainment', 'general', 'health', 'science', 'sports', 'technolog' ];
